@@ -1,4 +1,4 @@
-name: GitHub Actions CI
+name: CI
 on:
   push:
     branches: master
@@ -17,7 +17,7 @@ jobs:
 
     - name: Cache Homebrew Bundler RubyGems
       id: cache
-      uses: actions/cache@v1
+      uses: actions/cache@v2.1.6
       with:
         path: ${{ steps.set-up-homebrew.outputs.gems-path }}
         key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
@@ -43,5 +43,11 @@ jobs:
 
     - name: Run RSpec tests
       run: bundle exec rspec
-      env:
-        CODECOV_TOKEN: d8abdd06-9193-47d3-9da9-b4b25064e49b
+
+    - name: Test that installing works
+      run: |
+        echo 'brew "hello"' > ./Brewfile
+        brew bundle
+        hello
+      
+    - uses: codecov/codecov-action@f32b3a3741e1053eb607407145bc9619351dc93b
