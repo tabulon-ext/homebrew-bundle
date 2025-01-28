@@ -5,9 +5,9 @@ module Bundle
     module Dump
       module_function
 
-      def run(global: false, file: nil, describe: false, force: false, no_restart: false)
+      def run(global:, file:, describe:, force:, no_restart:, taps:, brews:, casks:, mas:, whalebrew:, vscode:)
         Bundle::Dumper.dump_brewfile(
-          global: global, file: file, describe: describe, force: force, no_restart: no_restart,
+          global:, file:, describe:, force:, no_restart:, taps:, brews:, casks:, mas:, whalebrew:, vscode:,
         )
       end
     end
